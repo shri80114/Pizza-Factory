@@ -15,8 +15,8 @@ public class BillingClass {
 		} else
 
 		{
-			System.out.println("Your Order is Sucessfully");
-			System.out.println("<----------------------> Welcome Pizza Factory <---------------------->");
+			System.out.println("Your Order is Sucessfully Placed");
+			//System.out.println("<----------------------> Welcome Pizza Factory <---------------------->");
 			new Product().displayFormat();
 			for (Product s : addProduct) {
 				s.display();

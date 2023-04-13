@@ -7,20 +7,20 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Factory {
-	int           bill = 0;
-	int           totalBill = 0;
-	static double FinalBill = 0.0;
-	Scanner sc = new Scanner(System.in);
+	int bill;
+	int totalBill;
+	static double FinalBill;
 
-	String  ProductName;
-	int     Quantity;
-	String  type;
-	long    Price;
-	double  TotalPrice;
-	int     tapping;
+	String ProductName;
+	int Quantity;
+	String type;
+	long Price;
+	double TotalPrice;
+	int tapping;
 
-	static int pizz;
+	int pizz;
 	static Set<Product> addProduct = new LinkedHashSet<>();
+	Scanner sc = new Scanner(System.in);
 
 	public void Menu() {
 		System.out.println(
@@ -49,15 +49,15 @@ public class Factory {
 			System.out.println("Which veg-option do you want?");
 			// vegPizza.forEach((x) -> System.out.println(x));
 			for (int i = 0; i < vegPizza.size(); i++) {
-				System.out.println(i + ")" + vegPizza.get(i));
+				System.out.println(i + 1 + ")" + vegPizza.get(i));
 			}
-			System.out.println("select pizz (0,1,2)");
+			System.out.println("select pizz (1,2,3)");
 
 //			while(true)
 //			{
 			pizz = sc.nextInt();
-			type="";
-			if (pizz == 0) {
+			type = "";
+			if (pizz == 1) {
 				ProductName = "Deluxe Veggie";
 				System.out.println("1)Regular \n2)Medium \n3)Large");
 				System.out.println("select pizz Type (1,2,3)");
@@ -77,29 +77,29 @@ public class Factory {
 					break;
 				default:
 					System.out.println("Invalid Pizza type entered, going to back to main menu, Enter Correct type");
-					//Menu();
+					// Menu();
 				}
 //				if (!type.isEmpty())
 //					break;
 //			}	
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
-
+				totalBill = Quantity * bill + tapping;
+				FinalBill = totalBill + FinalBill;
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
+//				if(res)
+//				System.out.println(
+//						"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
 				System.out.println("Do you want add extra topping? Please press 1 else press 2");
 				int Topping = sc.nextInt();
 				if (Topping == 1) {
-					tapping = new ToppingClass().vegTopping();
+					new ToppingClass().vegTopping(addProduct);
 				}
-				totalBill = Quantity * bill + tapping;
-				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
-				if (res)
-					System.out.println("Product added successfully.... product name : " + ProductName + "  size="
-							+ addProduct.size());
+
 				System.out.println("if want to continue with shopping press 1 else Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
 
-			} else if (pizz == 1) {
+			} else if (pizz == 2) {
 				ProductName = "Cheese & corn";
 				System.out.println("1)Regular \n2)Medium \n3)Large");
 				System.out.println("select pizz Type (1,2,3)");
@@ -123,22 +123,25 @@ public class Factory {
 				}
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
-
-				System.out.println("Do you want add extra topping? Please press 1 else press 2");
-				int Topping = sc.nextInt();
-				if (Topping == 1) {
-					tapping = new ToppingClass().vegTopping();
-				}
 				totalBill = Quantity * bill + tapping;
 				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
 				if (res)
 					System.out.println("Product added successfully.... product name : " + ProductName + "  size="
 							+ addProduct.size());
+				System.out.println("Do you want add extra topping? Please press 1 else press 2");
+				int Topping = sc.nextInt();
+				if (Topping == 1) {
+					new ToppingClass().vegTopping(addProduct);
+				}
+//				
+//				if (res)
+//					System.out.println("Product added successfully.... product name : " + ProductName + "  size="
+//							+ addProduct.size());
 				System.out.println("if want to continue with shopping press 1 else Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
 
-			} else if (pizz == 2) {
+			} else if (pizz == 3) {
 				ProductName = "Paneer Tikka";
 				System.out.println("1)Regular \n2)Medium \n3)Large");
 				System.out.println("select pizz Type (1,2,3)");
@@ -162,18 +165,20 @@ public class Factory {
 				}
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
-
-				System.out.println("Do you want add extra topping? Please press 1 else press 2");
-				int Topping = sc.nextInt();
-				if (Topping == 1) {
-					tapping = new ToppingClass().vegTopping();
-				}
 				totalBill = Quantity * bill + tapping;
 				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
 				if (res)
 					System.out.println("Product added successfully.... product name : " + ProductName + "  size="
 							+ addProduct.size());
+				System.out.println("Do you want add extra topping? Please press 1 else press 2");
+				int Topping = sc.nextInt();
+				if (Topping == 1) {
+					new ToppingClass().vegTopping(addProduct);
+				}
+//				if (res)
+//					System.out.println("Product added successfully.... product name : " + ProductName + "  size="
+//							+ addProduct.size());
 				System.out.println("if want to continue with shopping press 1 else Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
 
@@ -215,15 +220,18 @@ public class Factory {
 				}
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
+				totalBill = Quantity * bill + tapping;
+				FinalBill = totalBill + FinalBill;
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
+//				if(res)
+//					System.out.println(
+//							"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
 				System.out.println("If want add extra topping to your pizza Press 1 OtherWise press 2");
 				int ss = sc.nextInt();
 				if (ss == 1) {
-					tapping = new ToppingClass().nonVegTopping();
+					// nonVegTopping();
+					new NonVegTopping().nonVegTopping(addProduct);
 				}
-				totalBill = Quantity * bill + tapping;
-				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
-
 				System.out.println(" if want to continue with shopping press 1 Otherwise Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
 			} else if (pizz == 1) {
@@ -251,14 +259,19 @@ public class Factory {
 				}
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
+				totalBill = Quantity * bill + tapping;
+				FinalBill = totalBill + FinalBill;
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
+//				if(res)
+//					System.out.println(
+//							"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
 				System.out.println("If want add extra topping to your pizza Press 1 OtherWise press 2");
 				int ss = sc.nextInt();
 				if (ss == 1) {
-					tapping = new ToppingClass().nonVegTopping();
+					new NonVegTopping().nonVegTopping(addProduct);
 				}
-				totalBill = Quantity * bill + tapping;
-				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
+				// res = addProduct.add(new Product(ProductName, Quantity, type, bill,
+				// totalBill));
 
 				System.out.println(" if want to continue with shopping press 1 Otherwise Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
@@ -287,14 +300,17 @@ public class Factory {
 				}
 				System.out.println(type + " piza How many qty need ?");
 				int Quantity = sc.nextInt();
+				totalBill = Quantity * bill + tapping;
+				FinalBill = totalBill + FinalBill;
+				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill));
+//				if(res)
+//					System.out.println(
+//							"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
 				System.out.println("If want add extra topping to your pizza Press 1 OtherWise press 2");
 				int Topping = sc.nextInt();
 				if (Topping == 1) {
-					tapping = new ToppingClass().nonVegTopping();
+					new NonVegTopping().nonVegTopping(addProduct);
 				}
-				totalBill = Quantity * bill + tapping;
-				FinalBill = totalBill + FinalBill;
-				res = addProduct.add(new Product(ProductName, Quantity, type, bill, totalBill, tapping));
 				System.out.println(" if want to continue with shopping press 1 Otherwise Press 2");
 				new BillingClass().billing(FinalBill, addProduct);
 			} else {
@@ -303,6 +319,28 @@ public class Factory {
 				new Factory().Menu();
 			}
 		}
+			break;
+		case 3:
+			ArrayList<String> sides = new ArrayList<>();
+			sides.add("Mousse cake");
+			sides.add("Cold drink");
+			for (int i = 0; i < sides.size(); i++) {
+				System.out.println(i + 1 + ")" + sides.get(i));
+			}
+			System.out.println("select pizz (0,1,2)");
+			pizz = sc.nextInt();
+			if (pizz == 1) {
+				ProductName = "Mousse cake";
+				bill = 55;
+			} else if (pizz == 2) {
+				ProductName = "Mousse cake";
+				bill = 90;
+			}
+			res = addProduct.add(new Product(ProductName, 1, "sides", bill, totalBill));
+//			if (res)
+//				System.out.println(
+//						"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
+			new BillingClass().billing(FinalBill, addProduct);
 			break;
 		default:
 			System.out.println("Invalid Pizza type entered, going to back to main menu, Enter Correct type");

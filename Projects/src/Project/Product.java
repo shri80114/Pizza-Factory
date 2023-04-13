@@ -70,14 +70,14 @@ public class Product {
 		this.sides = sides;
 	}
 
-	public Product(String productName, int quantity, String type, double price, double totalPrice, int tapping) {
+	public Product(String productName, int quantity, String type, double price, double totalPrice) {
 		super();
 		ProductName = productName;
 		Quantity = quantity;
 		this.type = type;
 		Price = price;
 		TotalPrice = totalPrice;
-		this.tapping = tapping;
+		//this.tapping = tapping;
 	}
 
 	public Product() {
@@ -88,16 +88,13 @@ public class Product {
 	public void displayFormat() {
 		System.out.format(
 				"---------------------------------------------------------------------------------------------------\n");
-		System.out.print("|ProductName \t Quantity\t Type\t\t  Tapping  \t Price\t\t TotalPrice |\n");
+		System.out.format("| ProductName \t Type  \t Quantity \t Price\t\t TotalPrice |\n");
 		System.out.format(
 				"---------------------------------------------------------------------------------------------------\n");
-
 	}
-
-	public void display() {
-
-		System.out.println("|" + getProductName() + "\t  " + getQuantity() + "\t\t  " + getType() + "\t   "
-				+ getTapping() + "\t\t "  + getPrice() + "\t\t   " + getTotalPrice() + "   |");
+	public void display()
+	{
+		System.out.format(" "+getProductName()+"  "+getType()+"   "+getQuantity()+" \t\t"+ getPrice()+"\t\t "+getTotalPrice()+"\n");
 	}
 
 }

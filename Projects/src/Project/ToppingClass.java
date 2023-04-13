@@ -1,67 +1,54 @@
 package Project;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class ToppingClass {
 
-	 Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
+	int bill;
+	int totalBill;
 
-	public int nonVegTopping() {
-		System.out.println("1)Chicken tikka\n2)Barbeque chicken\n3)Grilled chicken");
-		System.out.println("select tapping type (1,2,3)");
-		int s = sc.nextInt();
-		if (s == 1)
-			return 35;
-		else if (s == 2)
-			return 45;
-		else if (s == 3)
-			return 40;
-		return 0;
-	}
+	String ProductName;
+	int Quantity;
+	String type;
+	long Price;
+	double TotalPrice;
+	int tapping;
 
-	public int vegTopping() {
+	public void vegTopping(Set<Product> addProduct) {
 		System.out.println("Select Veg toppings ");
-
-		System.out.println("1)Black olive\n2)Capsicum\n3)Paneer\n4)Mushroom\n5)Fresh tomato");
+		boolean res = false;
+//		System.out.println("1)Black olive\n2)Capsicum\n3)Paneer\n4)Mushroom\n5)Fresh tomato");
+		String[] veg = { "Black olive", "Capsicum", "Paneer", "Mushroom", "Fresh tomato" };
+		for(int i=0;i<veg.length;i++)
+		{
+			System.out.println(i+1+")"+veg[i]);
+		}
 		System.out.println("select topping type (1,2,3,4,5)");
 		int s = sc.nextInt();
-		if (s == 1)
-			return 20;
-		else if (s == 2)
-			return 25;
-		else if (s == 3)
-			return 35;
-		else if (s == 4)
-			return 30;
-		else if (s == 5)
-			return 10;
-		return 0;
-	}
-
-	int sides() {
-		System.out.println("1)Cold drink \n2)Mousse cake");
-		int type = sc.nextInt();
-
-		if (type == 1) {
-			System.out.println("1)sprite\n2)Pepsi\n3)Fanta");
-			int s = sc.nextInt();
-			if (s == 1)
-				return 20;
-			else if (s == 2)
-				return 25;
-			else if (s == 3)
-				return 20;
-		} else if (type == 2) {
-			System.out.println("1)Chocolate Chip\n 2)Vanilla \n3)Butter");
-			int s = sc.nextInt();
-			if (s == 1)
-				return 50;
-			else if (s == 2)
-				return 35;
-			else if (s == 3)
-				return 80;
+		if (s == 1) {
+			ProductName = "Black olive";
+			bill = 20;
+		} else if (s == 2) {
+			ProductName = "Capsicum";
+			bill = 25;
+		} else if (s == 3) {
+			ProductName = "Paneer";
+			bill = 35;
+		} else if (s == 4) {
+			ProductName = "Mushroom";
+			bill = 30;
+		} else {
+			ProductName = null;
+			bill = 0;
 		}
-		return 0;
+		// System.out.println(ProductName + " How many qty need ?");
+		totalBill = bill * 1;
+		res = addProduct.add(new Product(ProductName, 1, "Veg", bill, totalBill));
+		if (res)
+			System.out.println(
+					"Product added successfully.... product name : " + ProductName + "  size=" + addProduct.size());
 	}
 
 }
